@@ -1,0 +1,32 @@
+﻿﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Expense_Management_Software.Areas.MST_TransactionType.Models.MST_TransactionTypeModel
+<div class="d-flex flex-column">
+    <div class="d-flex justify-content-center">
+        @*<span class="col-3"></span>*@
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-tile mb-0">Transfer Type</h5>
+            </div>
+            <form enctype="multipart/form-data" method="post">
+                @Html.HiddenFor(x=>x.TransferTypeID)
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="card-body">
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="text" class="form-control" id="ecommerce-product-name" placeholder="TransferType Name" asp-for="TransferTypeName" aria-label="TransferType Name" required>
+                        <label for="ecommerce-product-name">Transfer Type</label>
+                    </div>
+                    <div class="row mb-3 align-content-center justify-content-center">
+                        <button class="btn btn-success align-content-center justify-content-center" style="width:40%" type="submit" asp-area="MST_TransactionType" asp-controller="MST_TransactionType" asp-action="Admin_MST_TransactionTypeSave">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        @*<span class="col-3"></span>*@
+    </div>
+</div>
+
+

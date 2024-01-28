@@ -1,0 +1,59 @@
+﻿﻿@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+}
+
+@using Expense_Management_Software.BAL
+@model Expense_Management_Software.Areas.MST_Transaction.Models.MST_TransactionModel
+<div class="d-flex flex-column">
+    <div class="d-flex justify-content-center">
+        @*<span class="col-3"></span>*@
+        <div class="card w-50">
+            <div class="card-header">
+                <h5 class="card-tile mb-0">Transaction Add</h5>
+            </div>
+            <form enctype="multipart/form-data" method="post">
+                @Html.HiddenFor(x=>x.TransferID)
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="card-body">
+                    <div class="form-floating form-floating-outline mb-4">
+                        <select class="form-control" asp-for="TransferTypeID" asp-items="@(new SelectList(ViewBag.TransferType,"TransferTypeID","TransferTypeName"))">
+                            <option value="">Select Transfer Type</option>
+                        </select>
+                        <label for="ecommerce-product-name">Transfer Type</label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <select class="form-control" asp-for="CategoryID" asp-items="@(new SelectList(ViewBag.Category,"CategoryID","CategoryName"))">
+                            <option value="">Select Category</option>
+                        </select>
+                        <label for="ecommerce-product-name">Category</label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <select class="form-control" asp-for="PaymentModeID" asp-items="@(new SelectList(ViewBag.PaymentMode,"PaymentModeID","PaymentModeType"))">
+                            <option value="">Select PaymentMode</option>
+                        </select>
+                        <label for="ecommerce-product-name">PaymentMode</label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Transfer Amount" asp-for="TransferAmount" aria-label="Transfer Amount" required>
+                        <label for="ecommerce-product-name">Transfer Amount</label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="date" class="form-control" id="ecommerce-product-name"  asp-for="TransferDate"  required>
+                        <label for="ecommerce-product-name">Transfer Date</label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <textarea type="text" class="form-control" id="ecommerce-product-name" placeholder="Transfer Note" asp-for="TransferNote" aria-label="Transfer Note" required></textarea>
+                        <label for="ecommerce-product-name">Transfer Note</label>
+                    </div>
+                    <div class="row mb-3 align-content-center justify-content-center">
+                        <button class="btn btn-success align-content-center justify-content-center" style="width:40%" type="submit" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionSave">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        @*<span class="col-3"></span>*@
+    </div>
+</div>
+
+

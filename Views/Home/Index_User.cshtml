@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+}
+
+@using Expense_Management_Software.Models;
+@using System.Data;
+@model DataTable;
+
+<div class="card m-3">
+    <div class="card-header">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="col-md-8">
+                <h5 class="card-title m-0 me-2">Transactions</h5>
+            </div>
+            <div class="col-md-3">
+                <a type="button" class="btn btn-primary waves-effect waves-light text-white" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionAdd">
+                    Add Transaction
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-5 col-6 ms-3">
+                <div class="d-flex align-items-center">
+                    <div class="avatar">
+                        <div class="avatar-initial bg-primary rounded shadow">
+                            <i class="mdi mdi-trending-up mdi-24px"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <div class="small mb-1">Income</div>
+                        <h5 class="mb-0">@Model.Rows[0]["Income"]</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-6">
+                <div class="d-flex align-items-center">
+                    <div class="avatar">
+                        <div class="avatar-initial bg-success rounded shadow">
+                            <i class="mdi mdi-trending-down mdi-24px"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <div class="small mb-1">Expense</div>
+                        <h5 class="mb-0">@Model.Rows[0]["Expense"]</h5>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-4 col-6">
+            <div class="d-flex align-items-center">
+            <div class="avatar">
+            <div class="avatar-initial bg-warning rounded shadow">
+            <img src="~/img/icons/payments/cash.png" style="width:25px; height:25px;" />
+            </div>
+            </div>
+            <div class="ms-3">
+            <div class="small mb-1">Balance</div>
+            <h5 class="mb-0"></h5>
+            </div>
+            </div>
+            </div>*@
+        </div>
+    </div>
+</div>
+
+<div class="d-flex">
+    <div class="card d-flex col-md-3 ms-3 me-3">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="card-title m-0 me-2">Category</h5>
+            <div class="dropdown">
+                <button class="btn p-0" type="button" id="saleStatus" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-dots-vertical mdi-24px"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="saleStatus">
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <span class="text-success me-2">
+                    <i class="mdi mdi-circle"></i>
+                </span>
+                <h6 class="fw-normal mb-0">Direct</h6>
+                <div class="flex-grow-1"></div>
+                <h6 class="text-end me-4 mb-0 text-success"><i class="mdi mdi-menu-up"></i>86,471</h6>
+                <h6 class="text-end me-2 mb-0 text-danger"><i class="mdi mdi-menu-down"></i>50,000</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="card d-flex col-md-3 ms-3 me-3">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="card-title m-0 me-2">Transfer Type</h5>
+            <div class="dropdown">
+                <button class="btn p-0" type="button" id="saleStatus" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-dots-vertical mdi-24px"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="saleStatus">
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <span class="text-success me-2">
+                    <i class="mdi mdi-circle"></i>
+                </span>
+                <h6 class="fw-normal mb-0">Direct</h6>
+                <div class="flex-grow-1"></div>
+                <h6 class="text-end me-4 mb-0 text-success"><i class="mdi mdi-menu-up"></i>86,471</h6>
+                <h6 class="text-end me-2 mb-0 text-danger"><i class="mdi mdi-menu-down"></i>50,000</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="card d-flex col-md-3 ms-3 me-3">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="card-title m-0 me-2">Payment Mode</h5>
+            <div class="dropdown">
+                <button class="btn p-0" type="button" id="saleStatus" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-dots-vertical mdi-24px"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="saleStatus">
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <span class="text-success me-2">
+                    <i class="mdi mdi-circle"></i>
+                </span>
+                <h6 class="fw-normal mb-0">Direct</h6>
+                <div class="flex-grow-1"></div>
+                <h6 class="text-end me-4 mb-0 text-success"><i class="mdi mdi-menu-up"></i>86,471</h6>
+                <h6 class="text-end me-2 mb-0 text-danger"><i class="mdi mdi-menu-down"></i>50,000</h6>
+            </div>
+        </div>
+    </div>
+</div>

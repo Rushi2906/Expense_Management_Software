@@ -1,0 +1,54 @@
+﻿﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Expense_Management_Software.Areas.ADMN_Category.Models.Admin_MST_CategoryModel
+<div class="d-flex flex-column justify-content-center">
+    <div class="d-flex justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-tile mb-0">Category Information</h5>
+            </div>
+            <form enctype="multipart/form-data" method="post" method="post" asp-area="ADMN_Category" asp-controller="Admin_MST_Category" asp-action="Admin_MST_CategorySave">
+                @Html.HiddenFor(x=>x.CategoryID)
+                @Html.HiddenFor(x=>x.CategoryImage)
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="card-body">
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Category Name" asp-for="CategoryName" aria-label="Category Name" required>
+                        <label for="ecommerce-product-name">Category Name</label>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-5 col-form-label">Category Image</label>
+                        <!-- Render Existing Image -->
+                        @if (!string.IsNullOrEmpty(Model.CategoryImage))
+                        {
+                            <div class="mb-2">
+                                <label class="form-label ">Existing Product Image</label>
+                                <img src="@Url.Content(Model.CategoryImage)" alt="Category Image" class="img-fluid" style="height:50px; width:50px;" />
+                            </div>
+                            <div class="mb-10 fv-row">
+                                <input type="file" name="CategoryPhoto" class="form-control mb-2 w-50" accept=".png, .jpg, .jpeg" asp-for="CategoryPhoto" />
+                                <span asp-validation-for="CategoryImage" class="text-danger"></span>
+                            </div>
+                        }
+                        <!-- Image Upload for Edit -->
+                        @if (string.IsNullOrEmpty(Model.CategoryImage))
+                        {
+                            <div class="mb-10 fv-row">
+                                <input type="file" name="CategoryPhoto" class="form-control mb-2" accept=".png, .jpg, .jpeg" asp-for="CategoryPhoto" required />
+                                <span asp-validation-for="CategoryImage" class="text-danger"></span>
+                            </div>
+                        }
+                    </div>
+                    <div class="row mb-3 align-content-center justify-content-center">
+                        <button class="btn btn-success align-content-center justify-content-center" style="width:40%" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

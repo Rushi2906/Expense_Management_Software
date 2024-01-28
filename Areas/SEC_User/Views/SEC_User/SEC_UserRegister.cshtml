@@ -1,0 +1,204 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using Expense_Management_Software.Areas.SEC_User.Models
+@model SEC_UserModel
+
+
+<!DOCTYPE html>
+
+<html lang="en"
+      class="light-style layout-wide customizer-hide"
+      dir="ltr"
+      data-theme="theme-default"
+      data-assets-path="~/"
+      data-template="vertical-menu-template-free">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Register Basic - Pages | Materio - Bootstrap Material Design Admin Template</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/vendor/fonts/materialdesignicons.css" />
+
+    <!-- Menu waves for no-customizer fix -->
+    <link rel="stylesheet" href="~/vendor/libs/node-waves/node-waves.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="~/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+    <!-- Page -->
+    <link rel="stylesheet" href="~/vendor/css/pages/page-auth.css" />
+
+    <!-- Helpers -->
+    <script src="~/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="~/js/config.js"></script>
+</head>
+
+<body>
+    <!-- Content -->
+
+    <div class="position-relative">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner py-4">
+                <!-- Register Card -->
+                <div class="card p-2">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center mt-5">
+                        <a href="index.html" class="app-brand-link gap-2">
+                            <img src="~/img/logo/Expensify_Logo.jpg" style="width:40px;" />
+                            <span class="app-brand-text demo text-heading fw-semibold">Expensify</span>
+                        </a>
+                    </div>
+                    <!-- /Logo -->
+                    <div class="card-body mt-2">
+                        <h4 class="mb-2">Adventure starts here 🚀</h4>
+                        <p class="mb-4">Make your expense management easy and fun!</p>
+
+                        <form id="formAuthentication" enctype="multipart/form-data" class="mb-3" method="post" asp-area="SEC_User" asp-controller="SEC_User" asp-action="Register" >
+                            @*UserName*@
+                            <div class="form-floating form-floating-outline mb-3">
+                                <input type="text"
+                                       class="form-control"
+                                       id="username"
+                                       placeholder="Enter your UserName"
+                                       autofocus 
+                                       asp-for="UserName"
+                                       required/>
+                                <label for="username">Username</label>
+                                @*<span asp-validation-for="UserName">Please Enter UserName</span>*@
+                            </div>
+                            @*Email*@
+                            <div class="form-floating form-floating-outline mb-3">
+                                <input type="text" class="form-control" id="email" placeholder="Enter your Email" asp-for="Email"/>
+                                <label for="email">Email</label>
+                            </div>
+                            @*Password*@
+                            <div class="mb-3 form-password-toggle">
+                                <div class="input-group input-group-merge">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="password"
+                                               id="password"
+                                               class="form-control"
+                                               placeholder="Enter Your Password"
+                                               aria-describedby="password" 
+                                               asp-for="Password"
+                                               required/>
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <span class="input-group-text cursor-pointer"><i class="mdi mdi-eye-off-outline"></i></span>
+                                </div>
+                            </div>
+                            @*FirstName*@
+                            <div class="form-floating form-floating-outline mb-3">
+                                <input type="text"
+                                       class="form-control"
+                                       id="username"
+                                       placeholder="Enter your FirstName"
+                                       autofocus 
+                                       asp-for="FirstName" required/>
+                                <label for="username">FirstName</label>
+                            </div>
+                            @*LastName*@
+                            <div class="form-floating form-floating-outline mb-3">
+                                <input type="text"
+                                       class="form-control"
+                                       id="username"
+                                       placeholder="Enter your LastName"
+                                       autofocus 
+                                       asp-for="LastName"/>
+                                <label for="username">LastName</label>
+                            </div>
+                            @*Profile Picture*@
+                            <div class="form-floating form-floating-outline mb-3">
+                                <label  class="form-label"></label>
+                                <div class="custom-file">
+                                    <input asp-for="CoverPhoto" class="custom-file-input" id="customFile" required>
+                                    <label class="custome-file-label" for="customFile"></label>
+                                </div>
+                                <div class="invalid-feedback">Please Choose file for photo</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                                    <label class="form-check-label" for="terms-conditions">
+                                        I agree to
+                                        <a href="javascript:void(0);">privacy policy & terms</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary d-grid w-100" type="submit">Sign up</button>
+                        </form>
+
+                        <p class="text-center">
+                            <span>Already have an account?</span>
+                            <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="SEC_UserLogin">
+                                <span>Sign in instead</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Register Card -->
+                <img src="~/img/illustrations/tree-3.png"
+                     alt="auth-tree"
+                     class="authentication-image-object-left d-none d-lg-block" />
+                <img src="~/img/illustrations/auth-basic-mask-light.png"
+                     class="authentication-image d-none d-lg-block"
+                     alt="triangle-bg"
+                     data-app-light-img="illustrations/auth-basic-mask-light.png"
+                     data-app-dark-img="illustrations/auth-basic-mask-dark.png" />
+                <img src="~/img/illustrations/tree.png"
+                     alt="auth-tree"
+                     class="authentication-image-object-right d-none d-lg-block" />
+            </div>
+        </div>
+    </div>
+
+    <!-- / Content -->
+
+    <div class="buy-now">
+        <a href="https://themeselection.com/item/materio-bootstrap-html-admin-template/"
+           target="_blank"
+           class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+    </div>
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="~/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/vendor/libs/popper/popper.js"></script>
+    <script src="~/vendor/js/bootstrap.js"></script>
+    <script src="~/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="~/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <!-- Main JS -->
+    <script src="~/js/main.js"></script>
+
+    <!-- Page JS -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

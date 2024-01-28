@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using Expense_Management_Software.Models;
+@using System.Data;
+@model DataTable;
+
+<div class="text-center">
+    <h1 class="display-4 mb-3">Welcome to the Expensify</h1>
+    <h4 class="">Don't let expenses control your life.</h4>
+
+    <div class="card me-3 mt-3">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="card-title m-0 me-2">Counts</h5>
+            <div class="dropdown">
+                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-dots-vertical mdi-24px"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Refresh</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Share</a>
+                    <a class="dropdown-item waves-effect" href="javascript:void(0);">Update</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row g-3 mb-xl-2">
+                <div class="col-md-4">
+                    <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="SEC_User_SelectAll">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-primary rounded shadow">
+                                    <img src="~/img/icons/payments/customer.png" style="width:17px; height:17px;" />
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <div class="small mb-1 fw-bold text-primary">Users</div>
+                                <h5 class="mb-0">@Model.Rows[0]["UserCount"]</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-area="ADMN_Category" asp-controller="Admin_MST_Category" asp-action="Admin_MST_CategoryList">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-success rounded shadow">
+                                    <img src="~/img/icons/payments/category.png" style="width:17px; height:17px;" />
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <div class="small mb-1 fw-bold text-success">Category</div>
+                                <h5 class="mb-0">@Model.Rows[0]["CategoryCount"]</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-area="ADMN_PaymentMode" asp-controller="Admin_MST_PaymentMode" asp-action="Admin_MST_PaymentModeList">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar">
+                                <div class="avatar-initial bg-warning rounded shadow">
+                                    <img src="~/img/icons/payments/wallet.png" style="width:17px; height:17px;" />
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <div class="small mb-1 fw-bold text-warning">PaymentMode</div>
+                                <h5 class="mb-0">@Model.Rows[0]["PaymentModeCount"]</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
