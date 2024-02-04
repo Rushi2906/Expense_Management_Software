@@ -10,4 +10,14 @@
         public IFormFile? CategoryPhoto { get; set; }
         public int? UserID { get; set; }
     }
+
+    public class MST_CategoryFilterModel
+    {
+        public DateTime? FROMDATE { get; set; }
+        public DateTime? TODATE { get; set; }
+        public DateTime? TransferDate { get; set; }
+        public string? CategoryName { get; set; }
+        public decimal? Income { get; set; }
+        public decimal? Expense { get; set; }
+    }
 }

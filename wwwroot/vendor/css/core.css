@@ -3927,7 +3927,7 @@ textarea.form-control-lg {
   --bs-card-cap-padding-x: 1.25rem;
   --bs-card-cap-bg: transparent;
   --bs-card-cap-color: #544f5a;
-  --bs-card-height: ;
+  --bs-card-height: auto;
   --bs-card-color: ;
   --bs-card-bg: #fff;
   --bs-card-img-overlay-padding: 1.5rem;
@@ -3974,8 +3974,8 @@ textarea.form-control-lg {
 }
 
 .card-title {
-  margin-bottom: var(--bs-card-title-spacer-y);
-  color: var(--bs-card-title-color);
+    margin-bottom: var(--bs-card-title-spacer-y);
+    color: var(--bs-card-title-color);
 }
 
 .card-subtitle {

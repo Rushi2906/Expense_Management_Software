@@ -61,7 +61,7 @@
                     </a>
 
                     @*<a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                        <i class="mdi menu-toggle-icon d-xl-block align-middle mdi-20px"></i>
+                    <i class="mdi menu-toggle-icon d-xl-block align-middle mdi-20px"></i>
                     </a>*@
                 </div>
 
@@ -71,8 +71,8 @@
                     <!-- Dashboards -->
                     <li class="menu-item active open ">
                         <a asp-controller="Home" asp-action="Index_User" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
-                            <div class="text-white ms-1">Dashboards</div>
+                            <img src="~/img/icons/misc/home.png" style="width:20px;" />
+                            <div class="text-white ms-3">Dashboards</div>
                         </a>
                         @*<ul class="menu-sub">
 
@@ -89,22 +89,31 @@
                         </a>
                     </li>
 
+                    @*Filter*@
+                    <li class="menu-item active mb-2 mt-3" onclick="class_avtive">
+                        <a asp-area="ADMN_Category" asp-controller="Admin_MST_Category" asp-action="CategoryFilter"
+                           class="menu-link">
+                            <img src="~/img/icons/misc/bar-chart.png" style="width:20px;" />
+                            <div class="ms-3">Analysis</div>
+                        </a>
+                    </li>
+
                     @*Profile*@
                     @*<li class="menu-item active mb-2">
-                        <a asp-area="ADMN_PaymentMode" asp-controller="Admin_MST_PaymentMode" asp-action="Admin_MST_PaymentModeList"
-                           class="menu-link">
-                            <img src="~/img/icons/payments/customer.png" style="width:20px;" />
-                            <div class="ms-3">Profile</div>
-                        </a>
+                    <a asp-area="ADMN_PaymentMode" asp-controller="Admin_MST_PaymentMode" asp-action="Admin_MST_PaymentModeList"
+                    class="menu-link">
+                    <img src="~/img/icons/payments/customer.png" style="width:20px;" />
+                    <div class="ms-3">Profile</div>
+                    </a>
                     </li>*@
 
                     @*User*@
                     <@*li class="menu-item active mb-2">
-                        <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="SEC_User_SelectAll"
-                           class="menu-link">
-                            <div>Users</div>
-                        </a>
-                    </li>*@
+                          <a asp-area="SEC_User" asp-controller="SEC_User" asp-action="SEC_User_SelectAll"
+                          class="menu-link">
+                          <div>Users</div>
+                          </a>
+                          </li>*@
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -230,7 +239,7 @@
                         </section>
                     </div>
                     <!-- / Content -->
-                    
+
 
                     <div class="content-backdrop fade"></div>
                 </div>

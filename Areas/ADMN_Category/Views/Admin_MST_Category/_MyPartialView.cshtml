@@ -1,0 +1,12 @@
+﻿@using System.Data;
+@model DataTable;
+
+<table id="displaytable">
+    @foreach (DataRow dt in Model.Rows)
+    {
+        <tr>
+            <td>@dt["TransferDate"]</td>
+            <td>@dt["CategoryName"]</td>
+        </tr>
+    }
+</table>

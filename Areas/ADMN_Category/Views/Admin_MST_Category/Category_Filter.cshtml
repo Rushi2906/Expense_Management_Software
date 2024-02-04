@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_User.cshtml";
+    MST_CategoryFilterModel filtermodel = new MST_CategoryFilterModel();
+}
+
+@using Expense_Management_Software.Areas.ADMN_Category.Models;
+@using System.Data;
+@model DataTable;
+
+<div class="d-flex justify-content-center align-content-center">
+    <img src="~/img/icons/misc/analysis.png" style="width:30px; height:30px;" />
+    <h3 class="ms-3">Do your Analysis</h3>
+</div>
+
+<div class="card m-3">
+    <form asp-area="ADMN_Category" asp-controller="Admin_MST_Category" asp-action="MST_CategoryFilter" method="post" id="myForm">
+        <div class="card-header">
+            <h5 class="card-title">Filter Category</h5>
+            <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+                <div class="col-md-4 product_status">
+                    <label for="ecommerce-product-name" class="fw-bold mb-1 ms-1">From Date</label>
+                    <input type="date" class="form-control" id="ecommerce-product-name" name="FROMDATE" />
+                </div>
+                <div class="col-md-4 product_category">
+                    <label for="ecommerce-product-name" class="fw-bold mb-1 ms-1">To Date</label>
+                    <input type="date" class="form-control" id="ecommerce-product-name" name="TODATE" />
+                </div>
+                <div class="col-md-4 product_stock mt-4">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light text-white" onclick="submitForm()">
+                        Show Category
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+    @if (Model != null)
+    {
+        if(Model.Rows.Count > 0)
+        {
+        <div class="card m-3">
+            <div class="table-responsive">
+                <table class="table table-responsive table-borderless">
+                    <thead>
+                        <tr>
+                            <th width="8%"></th>
+                            <th class="text-dark fw-bold" width="23%">TransferDate</th>
+                            <th class="text-dark fw-bold" width="23%">Category</th>
+                            <th class="text-dark fw-bold" width="23%">Income</th>
+                            <th class="text-dark fw-bold" width="23%">Expense</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow dr in Model.Rows)
+                        {
+                            <tr>
+                                <td class="" width="8%" onload="myfun()" @*style="background-color:myfun();"*@><i class="mdi mdi-circle"></i></td>
+                                <td class="text-dark" width="23%">@Convert.ToDateTime(dr["TransferDate"]).ToString("dd/MM/yy")</td>
+                                <td class="text-dark" width="23%">@dr["CategoryName"]</td>
+                                <td class="text-success fw-bold" width="23%"><i class="mdi mdi-menu-up"></i>@Convert.ToDouble(dr["Income"])</td>
+                                <td class="text-danger fw-bold" width="23%"><i class="mdi mdi-menu-down"></i>@Convert.ToDouble(dr["Expense"])</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        }
+        else
+        {
+            <div class="d-flex justify-content-center align-content-center">
+                <img src="~/img//icons/misc/no-data.png" style="height:300px; width:300px;" />
+            </div>
+        }
+
+    }
+
+
+<script>
+    //var color = ["0d6efd", "dc3545", "fd7e14", "ffc107", "198754"];
+
+    //var rand = function () {
+    //    return Math.floor(Math.random() * 5);
+    //}
+
+    //var randomColor = function () {
+    //    var c = color[rand()]
+    //    return "#" + c;
+    //};
+
+    //$(document).ready(function){
+    //    $('.randcolor').each(function () {
+    //        $(this).css('background', randomColor());
+    //    })
+    //}
+
+    function myfun() {
+        var color = ["0d6efd", "dc3545", "fd7e14", "ffc107", "198754"];
+
+        var rand = function () {
+            return Math.floor(Math.random() * 5);
+        }
+
+        var randomColor = function () {
+            var c = color[rand()]
+            return "#" + c;
+        };
+
+        $(this).css('background-color': randomColor);
+    }
+</script>
+
