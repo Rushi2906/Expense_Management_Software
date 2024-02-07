@@ -26,7 +26,7 @@
                     <input type="date" class="form-control" id="ecommerce-product-name" name="TODATE" />
                 </div>
                 <div class="col-md-4 product_stock mt-4">
-                    <button type="submit" class="btn btn-primary waves-effect waves-light text-white" onclick="submitForm()">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light text-white">
                         Show Category
                     </button>
                 </div>
@@ -36,10 +36,10 @@
 
 </div>
 
-    @if (Model != null)
+@if (Model != null)
+{
+    if (Model.Rows.Count > 0)
     {
-        if(Model.Rows.Count > 0)
-        {
         <div class="card m-3">
             <div class="table-responsive">
                 <table class="table table-responsive table-borderless">
@@ -56,7 +56,7 @@
                         @foreach (DataRow dr in Model.Rows)
                         {
                             <tr>
-                                <td class="" width="8%" onload="myfun()" @*style="background-color:myfun();"*@><i class="mdi mdi-circle"></i></td>
+                                <td class="" width="8%"><i class="mdi mdi-circle" @*id="colorpad" onload="setRandomColor()"*@></i></td>
                                 <td class="text-dark" width="23%">@Convert.ToDateTime(dr["TransferDate"]).ToString("dd/MM/yy")</td>
                                 <td class="text-dark" width="23%">@dr["CategoryName"]</td>
                                 <td class="text-success fw-bold" width="23%"><i class="mdi mdi-menu-up"></i>@Convert.ToDouble(dr["Income"])</td>
@@ -68,48 +68,68 @@
                 </table>
             </div>
         </div>
-        }
-        else
-        {
-            <div class="d-flex justify-content-center align-content-center">
-                <img src="~/img//icons/misc/no-data.png" style="height:300px; width:300px;" />
-            </div>
-        }
-
+    }
+    else
+    {
+        <div class="d-flex justify-content-center align-content-center">
+            <img src="~/img//icons/misc/no-data.png" style="height:300px; width:300px;" />
+        </div>
     }
 
+}
 
-<script>
-    //var color = ["0d6efd", "dc3545", "fd7e14", "ffc107", "198754"];
 
-    //var rand = function () {
-    //    return Math.floor(Math.random() * 5);
-    //}
+@section Scripts{
+    <script>
+        //var color = ["0d6efd", "dc3545", "fd7e14", "ffc107", "198754"];
 
-    //var randomColor = function () {
-    //    var c = color[rand()]
-    //    return "#" + c;
-    //};
+        //var rand = function () {
+        //    return Math.floor(Math.random() * 5);
+        //}
 
-    //$(document).ready(function){
-    //    $('.randcolor').each(function () {
-    //        $(this).css('background', randomColor());
-    //    })
-    //}
+        //var randomColor = function () {
+        //    var c = color[rand()]
+        //    return "#" + c;
+        //};
 
-    function myfun() {
-        var color = ["0d6efd", "dc3545", "fd7e14", "ffc107", "198754"];
+        //$(document).ready(function){
+        //    $('.randcolor').each(function () {
+        //        $(this).css('background', randomColor());
+        //    })
+        //}
 
-        var rand = function () {
-            return Math.floor(Math.random() * 5);
+        function myfun() {
+            var color = ["0d6efd", "dc3545", "fd7e14", "ffc107", "198754"];
+
+            var rand = function () {
+                return Math.floor(Math.random() * 5);
+            }
+
+            var randomColor = function () {
+                var c = color[rand()]
+                return "#" + c;
+            };
+
+            //$(this).css('background-color': randomColor);
+            return randomColor;
         }
 
-        var randomColor = function () {
-            var c = color[rand()]
-            return "#" + c;
-        };
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
 
-        $(this).css('background-color': randomColor);
-    }
-</script>
+
+
+        function setRandomColor() {
+            $("#colorpad").css("background-color", getRandomColor());
+        }
+
+    </script>
+ }
+
 

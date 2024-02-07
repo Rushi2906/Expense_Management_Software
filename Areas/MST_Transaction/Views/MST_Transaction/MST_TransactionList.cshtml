@@ -53,7 +53,7 @@
     <div class="card-datatable table-responsive m-2">
         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
             <div class="card-header d-flex border-top rounded-0 flex-wrap py-md-0">
-                <div class="mt-3 ms-n2 mb-3 col-5">
+                <div class="mt-3 ms-n2 mb-3 col-3">
                     <div id="sample_1_filter" class="dataTables_filter">
                         <label>
                             <input type="search"
@@ -62,18 +62,22 @@
                         </label>
                     </div>
                 </div>
-                <span class="col-2"></span>
-                <div class="d-flex align-items-baseline mt-3 col-5 justify-content-end">
+                @*<span class="col-2"></span>*@
+                <div class="d-flex align-items-baseline mt-3 col-8 justify-content-end">
                     <div class="dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0 gap-3 pt-0">
 
                         <div class="dt-buttons d-flex flex-wrap">
-                            <button class="dt-button buttons-collection dropdown-toggle btn btn-label-secondary me-3 waves-effect waves-light"
-                                    tabindex="0" aria-controls="DataTables_Table_0" type="button" aria-haspopup="dialog"
-                                    aria-expanded="false">
+                            <a type="button" class="btn btn-primary waves-effect waves-light text-white" @*asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionAdd"*@>
+                                Delete Transaction
+                            </a>
+                            @*<button class="dt-button buttons-collection dropdown-toggle btn btn-label-secondary me-3 waves-effect waves-light"
+                                     type="button"
+                                    aria-expanded="false" asp-action="ExportToExcel" asp-area="MST_Transaction" asp-controller="MST_Transaction">
                                 <span>
-                                    <i class="mdi mdi-export-variant me-1"></i><span class="d-none d-sm-inline-block">Export </span>
+                                    <i class="mdi mdi-export-variant me-1"></i><span class="d-none d-sm-inline-block">export </span>
                                 </span><span class="dt-down-arrow">▼</span>
-                            </button>
+                            </button>*@
+                            @Html.ActionLink("Export to Excel ▼", "ExportToExcel", "MST_Transaction", new { data = Model }, new { @class = "btn btn-secondary ms-2 me-2" })
                             <a type="button" class="btn btn-primary waves-effect waves-light text-white" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionAdd">
                                 Add Transaction
                             </a>
@@ -81,101 +85,103 @@
                     </div>
                 </div>
             </div>
-            <table class="datatables-products table dataTable no-footer dtr-column collapsed" id="DataTables_Table_0"
-                   aria-describedby="DataTables_Table_0_info" style="width: 1168px;">
-                <thead class="table-light">
-                    <tr class="">
-                        <th class="control sorting_disabled" rowspan="1" colspan="1" style="width: 5px;" aria-label="">
-                        </th>
-                        <th class="fw-medium justify-content-center align-items-center">TransferType Name</th>
-                        <th class="fw-medium justify-content-center align-items-center">Transfer Amount</th>
-                        <th class="fw-medium justify-content-center align-items-center">Transfer Date</th>
-                        @*<th class="fw-medium justify-content-center align-items-center">Transfer Note</th>*@
-                        <th class="fw-medium justify-content-center align-items-center">Category</th>
-                        <th class="fw-medium justify-content-center align-items-center">PaymentMode</th>
-                        <th rowspan="1"
-                            colspan="1"> Action</th>
-                    </tr>
-                <tbody id="sample_2">
-                        @foreach (DataRow dr in Model.Rows)
-                        {
+                <table class="datatables-products table dataTable no-footer dtr-column collapsed" id="DataTables_Table_0"
+                       aria-describedby="DataTables_Table_0_info" style="width: 1168px;">
+                    <thead class="table-light">
                         <tr class="">
-                            <td class="control" tabindex="0" style="">
-                                <button type="button">
-                                    <img src="~/img/icons/misc/plus.png" class="" style="height:20px">
-                                </button>
-                            </td>
-                            <td class="sorting_1">
-                                <div class="d-flex justify-content-center align-items-center product-name">
-                                    <div class="d-flex flex-column">
-                                        <span class="text-nowrap text-heading fw-medium">
-                                                @dr["TransferTypeName"]
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="sorting_1">
-                                <div class="d-flex justify-content-center align-items-center product-name">
-                                    <div class="d-flex flex-column">
-                                        <span class="text-nowrap text-heading fw-medium">
-                                                @Convert.ToDouble(dr["TransferAmount"].ToString())
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="sorting_1">
-                                <div class="d-flex justify-content-center align-items-center product-name">
-                                    <div class="d-flex flex-column">
-                                        <span class="text-nowrap text-heading fw-medium">
-                                                @Convert.ToDateTime(dr["TransferDate"]).ToString("dd/MM/yy")
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                                @*<td class="sorting_1">
-                        <div class="d-flex justify-content-center align-items-center product-name">
-                        <div class="d-flex flex-column">
-                        <span class="text-nowrap text-heading fw-medium">
-                        @dr["TransferNote"]
-                        </span>
-                        </div>
-                        </div>
-                        </td>*@
-                            <td class="sorting_1">
-                                <div class="d-flex justify-content-center align-items-center product-name">
-                                    <div class="d-flex flex-column">
-                                        <span class="text-nowrap text-heading fw-medium">
-                                                @dr["CategoryName"]
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="sorting_1">
-                                <div class="d-flex justify-content-center align-items-center product-name">
-                                    <div class="d-flex flex-column">
-                                        <span class="text-nowrap text-heading fw-medium">
-                                                @dr["PaymentModeType"]
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="" style="">
-                                <div class="d-flex align-items-sm-center justify-content-center">
-                                    <form method="post" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionAdd">
-                                        <input type="hidden" value="@Convert.ToInt32(dr["TransferID"])" name="TransferID" />
-                                        <button class="btn btn-sm btn-icon" type="submit"><i class="mdi mdi-pencil-outline text-primary"></i></button>
-                                    </form>
-                                    <form method="post" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionDelete">
-                                        <input type="hidden" value="@Convert.ToInt32(dr["TransferID"])" name="TransferID" />
-                                        <button class="btn btn-sm btn-icon" type="submit"><i class="mdi mdi-trash-can-outline text-danger"></i></button>
-                                    </form>
-                                </div>
-                            </td>
+                            <th><input type="checkbox" name="sample" class="selectall" /></th>
+                            
+                            <th class="fw-medium justify-content-center align-items-center">TransferType Name</th>
+                            <th class="fw-medium justify-content-center align-items-center">Transfer Amount</th>
+                            <th class="fw-medium justify-content-center align-items-center">Transfer Date</th>
+                            @*<th class="fw-medium justify-content-center align-items-center">Transfer Note</th>*@
+                            <th class="fw-medium justify-content-center align-items-center">Category</th>
+                            <th class="fw-medium justify-content-center align-items-center">PaymentMode</th>
+                            <th rowspan="1"
+                                colspan="1"> Action</th>
                         </tr>
-                        }
+                    <tbody id="sample_2" id="checkboxlist">
+                            @foreach (DataRow dr in Model.Rows)
+                            {
+                            <tr class="">
+                                <td class="control" tabindex="0" style="">
+                                        @*<button type="button">
+                                <img src="~/img/icons/misc/plus.png" class="" style="height:20px">
+                                </button>*@
+                                    <input type="checkbox" name="sample[]" value="@dr["TransferID"]">
+                                </td>
+                                <td class="sorting_1">
+                                    <div class="d-flex justify-content-center align-items-center product-name">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-nowrap text-heading fw-medium">
+                                                    @dr["TransferTypeName"]
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sorting_1">
+                                    <div class="d-flex justify-content-center align-items-center product-name">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-nowrap text-heading fw-medium">
+                                                    @Convert.ToDouble(dr["TransferAmount"].ToString())
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sorting_1">
+                                    <div class="d-flex justify-content-center align-items-center product-name">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-nowrap text-heading fw-medium">
+                                                    @Convert.ToDateTime(dr["TransferDate"]).ToString("dd/MM/yy")
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                                    @*<td class="sorting_1">
+                            <div class="d-flex justify-content-center align-items-center product-name">
+                            <div class="d-flex flex-column">
+                            <span class="text-nowrap text-heading fw-medium">
+                            @dr["TransferNote"]
+                            </span>
+                            </div>
+                            </div>
+                            </td>*@
+                                <td class="sorting_1">
+                                    <div class="d-flex justify-content-center align-items-center product-name">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-nowrap text-heading fw-medium">
+                                                    @dr["CategoryName"]
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sorting_1">
+                                    <div class="d-flex justify-content-center align-items-center product-name">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-nowrap text-heading fw-medium">
+                                                    @dr["PaymentModeType"]
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="" style="">
+                                    <div class="d-flex align-items-sm-center justify-content-center">
+                                        <form method="post" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionAdd">
+                                            <input type="hidden" value="@Convert.ToInt32(dr["TransferID"])" name="TransferID" />
+                                            <button class="btn btn-sm btn-icon" type="submit"><i class="mdi mdi-pencil-outline text-primary"></i></button>
+                                        </form>
+                                        <form method="post" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionDelete">
+                                            <input type="hidden" value="@Convert.ToInt32(dr["TransferID"])" name="TransferID" />
+                                            <button class="btn btn-sm btn-icon" type="submit"><i class="mdi mdi-trash-can-outline text-danger"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            
         </div>
     </div>
 </div>
@@ -191,6 +197,15 @@
                 });
             });
         });
+
+        $('.selectall').click(function () {
+            if ($(this).is(':checked')) {
+                $('div input').attr('checked', true);
+            } else {
+                $('div input').attr('checked', false);
+            }
+        });
+
     </script>
 }
 

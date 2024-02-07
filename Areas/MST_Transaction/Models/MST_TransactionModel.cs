@@ -33,4 +33,9 @@
         //public string? TransferNote { get; set; }
 
     }
+
+    public class MST_Transaction_MultipleDelete
+    {
+        public List<MST_TransactionModel> Transactions { get; set;}
+    }
 }

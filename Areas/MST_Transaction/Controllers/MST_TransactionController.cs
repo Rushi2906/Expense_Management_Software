@@ -6,7 +6,9 @@ using Expense_Management_Software.BAL;
 using Expense_Management_Software.DAL.MST_Transfer;
 using Expense_Management_Software.DAL.MST_TransferType;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 {
@@ -249,6 +251,77 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
             DataTable dt4 = dal.MST_Transfer_Filter(filterModel);
             ModelState.Clear();
             return View("MST_TransactionList", dt4);
+        }
+
+        #endregion
+
+
+        #region Export as Excel
+        public List<MST_TransactionModel> GetTransactionModels()
+        {
+            List<MST_TransactionModel> studentModels = new List<MST_TransactionModel>();
+            string myconnStr = this.Configuration.GetConnectionString("myConnectionString");
+            SqlConnection connection = new SqlConnection(myconnStr);
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "PR_MST_TRANSFER_SELECTALL";
+            cmd.Parameters.AddWithValue("@UserID", CV.UserID());
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    MST_TransactionModel studentModel = new MST_TransactionModel
+                    {
+                        TransferTypeName = reader["TransferTypeName"].ToString(),
+                        TransferAmount = Convert.ToDouble(reader["TransferAmount"]),
+                        TransferDate = Convert.ToDateTime(reader["TransferDate"]),
+                        TransferNote = reader["TransferNote"].ToString(),
+                        CategoryName = reader["CategoryName"].ToString(),
+                        PaymentModeType = reader["PaymentModeType"].ToString()
+                        // Add other properties as needed
+                    };
+                    studentModels.Add(studentModel);
+                }
+                return studentModels;
+            }
+        }
+
+        public ActionResult ExportToExcel(List<MST_TransactionModel> data)
+        {
+            
+            List<MST_TransactionModel> transactionModel = GetTransactionModels();
+            Console.WriteLine(transactionModel.Count);
+            byte[] fileContents;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("MST_Transaction");
+
+                // Add header row
+                worksheet.Cells["A1"].Value = "TransferTypeName";
+                worksheet.Cells["B1"].Value = "TransferAmount";
+                worksheet.Cells["C1"].Value = "TransferDate";
+                worksheet.Cells["D1"].Value = "CategoryName";
+                worksheet.Cells["E1"].Value = "PaymentModeType";
+
+                int row = 3;
+                // Add data rows
+                foreach (var tr in transactionModel)
+                {
+                    
+                    worksheet.Cells[row, 1].Value = tr.TransferTypeName;
+                    worksheet.Cells[row, 2].Value = Convert.ToDouble(tr.TransferAmount);
+                    worksheet.Cells[row, 3].Value = Convert.ToDateTime(tr.TransferDate);
+                    worksheet.Cells[row, 4].Value = tr.CategoryName;
+                    worksheet.Cells[row, 5].Value = tr.PaymentModeType;
+                    row++;
+                }
+
+                fileContents = package.GetAsByteArray();
+            }
+
+            return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ExpenseManager.xlsx");
         }
 
         #endregion
