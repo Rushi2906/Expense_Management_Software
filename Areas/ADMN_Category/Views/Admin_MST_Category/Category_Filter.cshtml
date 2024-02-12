@@ -40,6 +40,48 @@
 {
     if (Model.Rows.Count > 0)
     {
+
+        double income_total = 0;
+        double expense_total = 0;
+        int rows = Model.Rows.Count;
+
+        while (rows > 0)
+        {
+            income_total += @Convert.ToDouble(Model.Rows[rows-1]["Income"]);
+            expense_total += @Convert.ToDouble(Model.Rows[rows-1]["Expense"]);
+            rows--;
+        }
+
+        <div class="d-flex">
+            <div class="d-flex col-4"></div>
+            <div class="d-flex col-2 align-items-center justify-content-center">
+                <div class="d-flex align-items-center">
+                    <div class="avatar">
+                        <div class="avatar-initial bg-primary rounded shadow">
+                            <i class="mdi mdi-trending-up mdi-24px"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <div class="small mb-1">Income</div>
+                        <h5 class="mb-0">@income_total</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex col-2 align-items-center justify-content-center">
+                <div class="d-flex align-items-center">
+                    <div class="avatar">
+                        <div class="avatar-initial bg-success rounded shadow">
+                            <i class="mdi mdi-trending-down mdi-24px"></i>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <div class="small mb-1">Expense</div>
+                        <h5 class="mb-0">@expense_total</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex col-4"></div>
+        </div>
         <div class="card m-3">
             <div class="table-responsive">
                 <table class="table table-responsive table-borderless">
@@ -55,6 +97,7 @@
                     <tbody>
                         @foreach (DataRow dr in Model.Rows)
                         {
+                            
                             <tr>
                                 <td class="" width="8%"><i class="mdi mdi-circle" @*id="colorpad" onload="setRandomColor()"*@></i></td>
                                 <td class="text-dark" width="23%">@Convert.ToDateTime(dr["TransferDate"]).ToString("dd/MM/yy")</td>
@@ -62,7 +105,6 @@
                                 <td class="text-success fw-bold" width="23%"><i class="mdi mdi-menu-up"></i>@Convert.ToDouble(dr["Income"])</td>
                                 <td class="text-danger fw-bold" width="23%"><i class="mdi mdi-menu-down"></i>@Convert.ToDouble(dr["Expense"])</td>
                             </tr>
-
                         }
                     </tbody>
                 </table>
@@ -77,6 +119,7 @@
     }
 
 }
+
 
 
 @section Scripts{

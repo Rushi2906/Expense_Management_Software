@@ -11,12 +11,8 @@ namespace Expense_Management_Software.Areas.ADMN_Category.Controllers
     [Route("ADMN_Category/[controller]/[action]")]
     public class Admin_MST_CategoryController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        #region Configuration
+        #region Method : Configuration
 
         private readonly IConfiguration Configuration;
 
@@ -29,7 +25,7 @@ namespace Expense_Management_Software.Areas.ADMN_Category.Controllers
 
         #endregion
 
-        #region Admin_MST_CategoryList
+        #region Method : Admin_CategoryList 
 
         public IActionResult Admin_MST_CategoryList()
         {
@@ -39,7 +35,7 @@ namespace Expense_Management_Software.Areas.ADMN_Category.Controllers
 
         #endregion
 
-        #region PR_MST_CATEGORY_DELETEBYID
+        #region Method : Admin_CategoryDelete
 
         public IActionResult PR_MST_CATEGORY_DELETEBYID(int CategoryID)
         {
@@ -54,7 +50,7 @@ namespace Expense_Management_Software.Areas.ADMN_Category.Controllers
 
         #endregion
 
-        #region Admin_MST_CategorySave
+        #region Method : Admin_CategorySave
         public IActionResult Admin_MST_CategorySave(Admin_MST_CategoryModel admin_MST_CategoryModel)
         {
             if (ModelState.IsValid)
@@ -70,7 +66,7 @@ namespace Expense_Management_Software.Areas.ADMN_Category.Controllers
         }
         #endregion
 
-        #region Admin_MST_CategoryAdd
+        #region Method : Admin_CategoryAdd
         public IActionResult Admin_MST_CategoryAdd(int CategoryID)
         {
             Admin_MST_CategoryModel admin_MST_CategoryModel = dal.Admin_MST_CatgeoryByID(CategoryID);
@@ -87,6 +83,7 @@ namespace Expense_Management_Software.Areas.ADMN_Category.Controllers
         }
         #endregion
 
+        #region Method : User_CategoryFilter_ForDateRange
         public IActionResult CategoryFilter()
         {
             return View("Category_Filter");
@@ -110,5 +107,7 @@ namespace Expense_Management_Software.Areas.ADMN_Category.Controllers
             Console.WriteLine("Count"+dt4.Rows.Count);
             return View("Category_Filter",dt4);
         }
+
+        #endregion
     }
 }

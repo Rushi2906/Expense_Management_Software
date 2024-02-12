@@ -11,12 +11,8 @@ namespace Expense_Management_Software.Areas.ADMN_PaymentMode.Controllers
     [Route("ADMN_PaymentMode/[controller]/[action]")]
     public class Admin_MST_PaymentModeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        #region Configuration
+        #region Method : Configuration
 
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -31,7 +27,7 @@ namespace Expense_Management_Software.Areas.ADMN_PaymentMode.Controllers
 
         #endregion
 
-        #region Admin_MST_PaymentModeList
+        #region Method : Admin_PaymentModeList
 
         public IActionResult Admin_MST_PaymentModeList()
         {
@@ -41,7 +37,7 @@ namespace Expense_Management_Software.Areas.ADMN_PaymentMode.Controllers
 
         #endregion
 
-        #region Admin_MST_PaymentModeSave
+        #region Method : Admin_PaymentModeSave
         public IActionResult Admin_MST_PaymentModeSave(Admin_MST_PaymentModeModel admin_MST_PaymentModeModel)
         {
             if (ModelState.IsValid)
@@ -57,7 +53,7 @@ namespace Expense_Management_Software.Areas.ADMN_PaymentMode.Controllers
         }
         #endregion
 
-        #region Admin_MST_PaymentModeAdd
+        #region Method : Admin_PaymentModeAdd
         public IActionResult Admin_MST_PaymentModeAdd(int PaymentModeID)
         {
             Admin_MST_PaymentModeModel admin_MST_PaymentModeModel = dal.Admin_MST_PaymentModeByID(PaymentModeID);
@@ -74,7 +70,7 @@ namespace Expense_Management_Software.Areas.ADMN_PaymentMode.Controllers
         }
         #endregion
 
-        #region Admin_MST_PaymentModeDelete
+        #region Method : Admin_PaymentModeDelete
         public IActionResult Admin_MST_PaymentModeDelete(int PaymentModeID)
         {
             bool isSuccess = dal.PR_MST_PAYMENTMODE_DELETEBYID(PaymentModeID);

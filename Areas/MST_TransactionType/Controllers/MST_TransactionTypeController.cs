@@ -11,12 +11,8 @@ namespace Expense_Management_Software.Areas.MST_TransactionType.Controllers
     [Route("MST_TransactionType/[controller]/[action]")]
     public class MST_TransactionTypeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        #region Configuration
+        #region Method : Configuration
 
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -32,7 +28,7 @@ namespace Expense_Management_Software.Areas.MST_TransactionType.Controllers
 
         #endregion
 
-        #region MST_TransferTypeList
+        #region Method : Admin_TransactionTypeList
 
         public IActionResult MST_TransactionTypeList()
         {
@@ -42,8 +38,7 @@ namespace Expense_Management_Software.Areas.MST_TransactionType.Controllers
 
         #endregion
 
-
-        #region Admin_MST_TransferTypeSave
+        #region Method : Admin_TransactionTypeSave
         public IActionResult Admin_MST_TransactionTypeSave(MST_TransactionTypeModel transactionTypeModel)
         {
             if (ModelState.IsValid)
@@ -59,7 +54,7 @@ namespace Expense_Management_Software.Areas.MST_TransactionType.Controllers
         }
         #endregion
 
-        #region Admin_MST_PaymentModeAdd
+        #region Method : Admin_TransactionTypeAdd
         public IActionResult Admin_MST_TransactionTypeAdd(int TransferTypeID)
         {
             MST_TransactionTypeModel admin_MST_TransferTypeModel = dal.Admin_MST_TransferTypeByID(TransferTypeID);
@@ -76,7 +71,7 @@ namespace Expense_Management_Software.Areas.MST_TransactionType.Controllers
         }
         #endregion
 
-        #region Admin_MST_PaymentModeDelete
+        #region Method : Admin_TransactionTypeDelete
         public IActionResult Admin_MST_TransferTypeDelete(int TransferTypeID)
         {
             Console.WriteLine(TransferTypeID);

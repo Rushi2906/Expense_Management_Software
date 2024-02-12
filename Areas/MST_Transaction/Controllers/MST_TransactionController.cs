@@ -16,12 +16,8 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
     [Route("MST_Transaction/[controller]/[action]")]
     public class MST_TransactionController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        #region Configuration
+        #region Method : Configuration
 
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -38,12 +34,12 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 
         #endregion
 
-        #region MST_TransferTypeList
+        #region Method : User_TransactionList
 
         public IActionResult MST_TransactionList()
         {
 
-            #region Category Dropdown
+            #region Method : Category_Dropdown
 
             DataTable dt = dal.Admin_MST_Transfer_Category_Dropdown();
             List<Admin_MST_CategoryModel> list = new List<Admin_MST_CategoryModel>();
@@ -59,7 +55,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 
             #endregion
 
-            #region Transfer Type Dropdown
+            #region Method : TransferType_Dropdown
 
             DataTable dt2 = dal.Admin_MST_Transfer_Type_Dropdown();
             List<MST_TransactionTypeModel> list2 = new List<MST_TransactionTypeModel>();
@@ -75,7 +71,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 
             #endregion
 
-            #region Payment Mode Dropdown
+            #region Method : PaymentMode_Dropdown
 
             DataTable dt3 = dal.Admin_MST_Payment_Mode_Dropdown();
             List<Admin_MST_PaymentModeModel> list3 = new List<Admin_MST_PaymentModeModel>();
@@ -97,7 +93,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 
         #endregion
 
-        #region Admin_MST_TransferSave
+        #region Method : User_TransactionSave
         public IActionResult Admin_MST_TransactionSave(MST_TransactionModel transactionModel)
         {
             if (ModelState.IsValid)
@@ -113,7 +109,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
         }
         #endregion
 
-        #region Admin_MST_TransferAdd
+        #region Method : User_TransactionAdd
         public IActionResult Admin_MST_TransactionAdd(int TransferID)
         {
             MST_TransactionModel admin_MST_TransferModel = dal.Admin_MST_TransferByID(TransferID);
@@ -179,7 +175,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
         }
         #endregion
 
-        #region Admin_MST_TransactionDelete
+        #region Method : User_TransactionDelete
         public IActionResult Admin_MST_TransactionDelete(int TransferID)
         {
             Console.WriteLine(TransferID);
@@ -195,7 +191,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 
         #endregion
 
-        #region Filter Transaction
+        #region Method : User_Transaction_Filter
 
         public IActionResult MST_Transaction_Filter(MST_Transaction_FilterModel filterModel)
         {
@@ -255,8 +251,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 
         #endregion
 
-
-        #region Export as Excel
+        #region Method : User_ExportData_Excel
         public List<MST_TransactionModel> GetTransactionModels()
         {
             List<MST_TransactionModel> studentModels = new List<MST_TransactionModel>();

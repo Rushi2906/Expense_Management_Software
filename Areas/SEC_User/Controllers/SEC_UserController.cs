@@ -13,8 +13,7 @@ namespace Expense_Management_Software.Areas.SEC_User.Controllers
     public class SEC_UserController : Controller
     {
 
-
-        #region Configuration
+        #region Method : Configuration
 
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -25,11 +24,9 @@ namespace Expense_Management_Software.Areas.SEC_User.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-
-
         #endregion
 
-        #region Admin Login
+        #region Method : Login
 
         public IActionResult SEC_UserLogin()
         {
@@ -116,7 +113,7 @@ namespace Expense_Management_Software.Areas.SEC_User.Controllers
 
         #endregion
 
-        #region Admin LogOut
+        #region Method : Logout
 
         public IActionResult Logout()
         {
@@ -126,7 +123,7 @@ namespace Expense_Management_Software.Areas.SEC_User.Controllers
 
         #endregion
 
-        #region Admin Register
+        #region Method : Register
 
         public IActionResult SEC_UserRegister()
         {
@@ -149,7 +146,7 @@ namespace Expense_Management_Software.Areas.SEC_User.Controllers
         }
         #endregion
 
-        #region Admin SelectAllUser
+        #region Method : Admin_UserSelectAll
 
         public IActionResult SEC_User_SelectAll()
         {
@@ -160,7 +157,7 @@ namespace Expense_Management_Software.Areas.SEC_User.Controllers
 
         #endregion
 
-        #region Admin SEC_User_DeleteByID
+        #region Method : Admin_UserDelete
         public IActionResult SEC_User_DeleteByID(int UserID)
         {
             SEC_DAL dal = new SEC_DAL(_webHostEnvironment);

@@ -117,43 +117,17 @@ namespace Expense_Management_Software.Controllers
             }
             connection3.Close();
 
-            //DataTable dt4 = new DataTable();
-            //SqlConnection connection4 = new SqlConnection(connectionStr);
-            //connection3.Open();
-            //SqlCommand objCmd4 = connection3.CreateCommand();
-            //objCmd4.CommandType = CommandType.StoredProcedure;
-            //objCmd4.CommandText = "[PR_DASHBOARD_CATEGORY_FILTER_RANGEDATE]";
-            //objCmd4.Parameters.AddWithValue("@UserID", CV.UserID());
-            //objCmd4.Parameters.AddWithValue("@FromDate", categoryFilter2.FromDate);
-            //objCmd4.Parameters.AddWithValue("@ToDate", categoryFilter2.ToDate);
-            //SqlDataReader objSDR4 = objCmd4.ExecuteReader();
-            //dt4.Load(objSDR4);
-
-            //List<CategoryFilter2Model> categoryFilter2Models = new List<CategoryFilter2Model>();
-            //foreach (DataRow row in dt4.Rows)
-            //{
-            //    CategoryFilter2Model model4 = new CategoryFilter2Model();
-            //    model4.TransferDate = Convert.ToDateTime(row["TransferDate"].ToString());
-            //    model4.CategoryName = row["CategoryName"].ToString();
-            //    model4.Income = Convert.ToDecimal(row["INCOME"].ToString());
-            //    model4.Expense = Convert.ToDecimal(row["EXPENSE"].ToString());
-            //    categoryFilter2Models.Add(model4);
-            //}
-            //connection4.Close();
-
             var tables = new Demo
             {
                 Categories = category,
                 Counters = counters,
-                PaymentModes = paymentModes,
-                //Categories2 = categoryFilter2Models
+                PaymentModes = paymentModes
             };
 
             Console.WriteLine(tables);
             return View(tables);
         }
 
-        //[Route("Home/Index_User")]
         public IActionResult Dashboard_Category_Filter()
         {
             string connectionStr = this.Configuration.GetConnectionString("myConnectionString");
