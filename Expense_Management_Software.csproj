@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Effortless.Net.Encryption" Version="4.0.0" />
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
     <PackageReference Include="EPPlus" Version="7.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />

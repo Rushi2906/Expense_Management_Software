@@ -171,6 +171,22 @@ namespace Expense_Management_Software.Areas.SEC_User.Controllers
         }
         #endregion
 
+        #region Method : DeavtivateAccount
+
+        public IActionResult SEC_User_Deactive(int UserID)
+        {
+            SEC_DAL dal = new SEC_DAL(_webHostEnvironment);
+            bool isSuccess = dal.PR_MST_User_Deactive(UserID);
+            if (isSuccess)
+            {
+                
+                return RedirectToAction("SEC_UserLogin");
+            }
+            return RedirectToAction("SEC_User_SelectAll");
+        }
+
+        #endregion
+
         #region User Home Page
 
         public IActionResult SEC_User_Dashboard()

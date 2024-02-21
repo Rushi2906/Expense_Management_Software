@@ -123,7 +123,7 @@ namespace Expense_Management_Software.DAL.SEC_DAL
 
         #endregion
 
-        #region: Method: PR_User_Delete
+        #region Method: PR_User_Delete
 
         public bool PR_MST_USER_DELETEBYID(int UserID)
         {
@@ -144,7 +144,25 @@ namespace Expense_Management_Software.DAL.SEC_DAL
 
         #endregion
 
+        #region Method : PR_MST_User_Deactive
 
+        public bool PR_MST_User_Deactive(int UserID)
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("[PR_MST_USER_DEAVTIVE]");
+                sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, UserID);
+                bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
+                return isSuccess;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        #endregion
 
     }
 }

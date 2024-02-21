@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using Effortless.Net.Encryption;
 @using Expense_Management_Software.Areas.ADMN_PaymentMode.Models
 @using System.Data;
 @model DataTable;
@@ -88,7 +89,14 @@
                                         </form>
                                     </div>
                                     <div class="ms-2">
-                                        <form asp-area="ADMN_PaymentMode" asp-controller="Admin_MST_PaymentMode" asp-action="Admin_MST_PaymentModeAdd">
+                                        <encrypted-edit id="" />
+                                            @{
+                                                byte[] key = Bytes.GenerateKey();
+                                                byte[] iv = Bytes.GenerateIV();
+                                                string id = Convert.ToInt32(dr["PaymentModeID"]).ToString();
+                                                string encryptID = Strings.Encrypt(id,key,iv);
+                                            } 
+                                        <form asp-area="ADMN_PaymentMode" asp-controller="Admin_MST_PaymentMode" asp-action="Admin_MST_PaymentModeAdd" asp-route-PaymentModeID="@encryptID">
                                             <input type="hidden" value="@Convert.ToInt32(dr["PaymentModeID"])" name="PaymentModeID" />
                                             <button type="submit" class="btn btn-info" value="Update">Update</button>
                                         </form>

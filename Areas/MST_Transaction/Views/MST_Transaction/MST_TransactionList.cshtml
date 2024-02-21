@@ -67,7 +67,7 @@
                     <div class="dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0 gap-3 pt-0">
 
                         <div class="dt-buttons d-flex flex-wrap">
-                            <a type="button" class="btn btn-primary waves-effect waves-light text-white" @*asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="Admin_MST_TransactionAdd"*@>
+                            <a type="button" id="deleteSelectedBtn" class="btn btn-primary waves-effect waves-light text-white" asp-area="MST_Transaction" asp-controller="MST_Transaction" asp-action="MultipleDelete">
                                 Delete Transaction
                             </a>
                             @*<button class="dt-button buttons-collection dropdown-toggle btn btn-label-secondary me-3 waves-effect waves-light"
@@ -108,7 +108,7 @@
                                         @*<button type="button">
                                 <img src="~/img/icons/misc/plus.png" class="" style="height:20px">
                                 </button>*@
-                                    <input type="checkbox" name="sample[]" value="@dr["TransferID"]">
+                                    <input type="checkbox" class="chkDelete" name="chkDeleteName" value="@dr["TransferID"]">
                                 </td>
                                 <td class="sorting_1">
                                     <div class="d-flex justify-content-center align-items-center product-name">
@@ -207,5 +207,39 @@
         });
 
     </script>
+
+    <!--Multiple Delete-->
+    <script>
+        $(document).ready(function () {
+            console.log("Hello");
+            $("#deleteSelectedBtn").on("click", function (e) {
+                var confirmation = confirm("Are you sure?")
+                if (confirmation) {
+
+                    e.preventDefault();
+                    var data = [];
+                    $("input[name='chkDeleteName']:checked").each(function () {
+                        data.push($(this).val());
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("MultipleDelete")",
+                        data: { id: data },
+                        traditional: true,
+                        success: function (result) {
+                            //alert("done");
+                            alert("Delete Success")
+                            location.reload();
+                        }
+                    })
+                }
+                else
+                    alert("Delete Canceled")
+            })
+        })
+
+    </script>
+    <!--End Multiple Delete-->
 }
 

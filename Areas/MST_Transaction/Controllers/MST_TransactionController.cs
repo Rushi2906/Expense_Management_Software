@@ -321,5 +321,27 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
 
         #endregion
 
+        #region Method : Multiple Delete
+
+        [HttpPost]
+        public IActionResult MultipleDelete(int[] id)
+        {
+            foreach(var item in id)
+            {
+                try
+                {
+                    Admin_MST_TransactionDelete(item);
+                    Console.WriteLine("Dleted" + item);
+                }
+                catch(Exception e)
+                {
+                    throw e;
+                }
+            }
+            return RedirectToAction("MST_TransactionList");
+        }
+
+        #endregion
+
     }
 }

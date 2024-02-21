@@ -4,9 +4,6 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
 using Expense_Management_Software.BAL;
-using NuGet.Protocol;
-using System.Diagnostics.Metrics;
-using static Expense_Management_Software.Models.PaymentModeModel;
 
 namespace Expense_Management_Software.Controllers
 {
@@ -57,19 +54,34 @@ namespace Expense_Management_Software.Controllers
             connection.Open();
             SqlCommand objCmd = connection.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "[PR_Dashboard_Count]";
+            objCmd.CommandText = "[PR_USER_DASHBOARDCOUNT]";
+            objCmd.Parameters.AddWithValue("@UserID", CV.UserID());
             SqlDataReader objSDR = objCmd.ExecuteReader();
             dt.Load(objSDR);
-
-            List<HomeModel> counters = new List<HomeModel>();
+            Console.WriteLine(dt.Rows.Count);
+            
+            List<UserDashboardCount> counters = new List<UserDashboardCount>();
             foreach(DataRow row in dt.Rows)
             {
-                HomeModel model = new HomeModel();
-                model.UserCount = Convert.ToInt32(row["UserCount"]);
-                model.CategoryCount = Convert.ToInt32(row["CategoryCount"]);
-                model.PaymnetModeCount = Convert.ToInt32(row["PaymentModeCount"]);
-                model.Income = Convert.ToDecimal(row["Income"].ToString());
-                model.Expense = Convert.ToDecimal(row["Expense"].ToString());
+                UserDashboardCount model = new UserDashboardCount();
+                Console.WriteLine("income"+row["Income"]);
+                Console.WriteLine("income2"+row["Income"].ToString());
+                if (row["Income"].ToString() == "")
+                {
+                    model.Income = 0;
+                }
+                else
+                {
+                    model.Income = Convert.ToDecimal(row["Income"].ToString());
+                }
+                if (row["Expense"].ToString() == "")
+                {
+                    model.Expense = 0;
+                }
+                else
+                {
+                    model.Expense = Convert.ToDecimal(row["Expense"].ToString());
+                }
                 counters.Add(model);
             }
             connection.Close();
@@ -120,7 +132,7 @@ namespace Expense_Management_Software.Controllers
             var tables = new Demo
             {
                 Categories = category,
-                Counters = counters,
+                UserCounters = counters,
                 PaymentModes = paymentModes
             };
 

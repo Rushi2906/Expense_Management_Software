@@ -12,6 +12,9 @@
             </div>
             <form enctype="multipart/form-data" method="post">
                 @Html.HiddenFor(x=>x.PaymentModeID)
+                @{
+                    Console.WriteLine(Model.PaymentModeID);
+                }
                 <div asp-validation-summary="All" class="text-danger"></div>
 
                 <div class="card-body">

@@ -31,7 +31,11 @@
                     </div>
                     <div class="ms-3">
                         <div class="small mb-1">Income</div>
-                        <h5 class="mb-0">@Model.Counters.FirstOrDefault().Income</h5>
+                        @if (@Model.UserCounters.FirstOrDefault().Income != null)
+                        {
+                            
+                        }
+                        <h5 class="mb-0">@Model.UserCounters.FirstOrDefault().Income</h5>
                     </div>
                 </div>
             </div>
@@ -44,7 +48,7 @@
                     </div>
                     <div class="ms-3">
                         <div class="small mb-1">Expense</div>
-                        <h5 class="mb-0">@Model.Counters.FirstOrDefault().Expense</h5>
+                        <h5 class="mb-0">@Model.UserCounters.FirstOrDefault().Expense</h5>
                     </div>
                 </div>
             </div>
