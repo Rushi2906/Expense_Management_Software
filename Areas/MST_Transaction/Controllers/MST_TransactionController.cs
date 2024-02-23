@@ -2,6 +2,7 @@
 using Expense_Management_Software.Areas.ADMN_PaymentMode.Models;
 using Expense_Management_Software.Areas.MST_Transaction.Models;
 using Expense_Management_Software.Areas.MST_TransactionType.Models;
+using Expense_Management_Software.Areas.SEC_User.Models;
 using Expense_Management_Software.BAL;
 using Expense_Management_Software.DAL.MST_Transfer;
 using Expense_Management_Software.DAL.MST_TransferType;
@@ -101,7 +102,14 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
                 if (dal.Admin_MST_TransferSave(transactionModel))
                 {
                     TempData["SuccessMessage"] = "Data Added Successfully.";
-                    return RedirectToAction("MST_TransactionList");
+                    if (CV.IsAdmin() == false)
+                    {
+                        return RedirectToAction("MST_TransactionList");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
 
             }
@@ -159,6 +167,26 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
                 list3.Add(model);
             }
             ViewBag.PaymentMode = list3;
+
+            #endregion
+
+            #region User Dropdown
+
+            DataTable dt4 = dal.Admin_MST_User_Dropdown();
+            List<SEC_UserModel> list4 = new List<SEC_UserModel>();
+
+            foreach (DataRow dr in dt4.Rows)
+            {
+                SEC_UserModel model = new SEC_UserModel();
+                model.UserID = Convert.ToInt32(dr["UserID"]);
+                model.UserName = dr["UserName"].ToString();
+               
+                if (Convert.ToBoolean(dr["IsAdmin"].ToString()) == false)
+                {
+                    list4.Add(model);
+                }
+            }
+            ViewBag.User = list4;
 
             #endregion
 
@@ -269,7 +297,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
                     MST_TransactionModel studentModel = new MST_TransactionModel
                     {
                         TransferTypeName = reader["TransferTypeName"].ToString(),
-                        TransferAmount = Convert.ToDouble(reader["TransferAmount"]),
+                        TransferAmount = reader["TransferAmount"].ToString(),
                         TransferDate = Convert.ToDateTime(reader["TransferDate"]),
                         TransferNote = reader["TransferNote"].ToString(),
                         CategoryName = reader["CategoryName"].ToString(),
@@ -342,6 +370,7 @@ namespace Expense_Management_Software.Areas.MST_Transaction.Controllers
         }
 
         #endregion
+
 
     }
 }

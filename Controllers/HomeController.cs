@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
 using Expense_Management_Software.BAL;
+using System.Globalization;
 
 namespace Expense_Management_Software.Controllers
 {
@@ -48,6 +49,9 @@ namespace Expense_Management_Software.Controllers
 
         public IActionResult Index_User()
         {
+
+            CultureInfo indianCulture = new CultureInfo("en-IN");
+
             string connectionStr = this.Configuration.GetConnectionString("myConnectionString");
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(connectionStr);
@@ -68,19 +72,19 @@ namespace Expense_Management_Software.Controllers
                 Console.WriteLine("income2"+row["Income"].ToString());
                 if (row["Income"].ToString() == "")
                 {
-                    model.Income = 0;
+                    model.Income = "0";
                 }
                 else
                 {
-                    model.Income = Convert.ToDecimal(row["Income"].ToString());
+                    model.Income = row["Income"].ToString();
                 }
                 if (row["Expense"].ToString() == "")
                 {
-                    model.Expense = 0;
+                    model.Expense = "0";
                 }
                 else
                 {
-                    model.Expense = Convert.ToDecimal(row["Expense"].ToString());
+                    model.Expense = row["Expense"].ToString();
                 }
                 counters.Add(model);
             }
@@ -101,8 +105,8 @@ namespace Expense_Management_Software.Controllers
             {
                 CategoryFilterModel model2 = new CategoryFilterModel();
                 model2.CategoryName = row["CategoryName"].ToString();
-                model2.Category_INCOME = Convert.ToDecimal(row["INCOME"].ToString());
-                model2.Category_EXPENSE = Convert.ToDecimal(row["EXPENSE"].ToString());
+                model2.Category_INCOME = row["INCOME"].ToString();
+                model2.Category_EXPENSE = row["EXPENSE"].ToString();
                 category.Add(model2);
             }
             connection2.Close();
@@ -123,8 +127,8 @@ namespace Expense_Management_Software.Controllers
             {
                 PaymentModeModel model3 = new PaymentModeModel();
                 model3.PaymentModeName = row["PaymentModeType"].ToString();
-                model3.Payment_INCOME = Convert.ToDecimal(row["INCOME"].ToString());
-                model3.Payment_EXPENSE = Convert.ToDecimal(row["EXPENSE"].ToString());
+                model3.Payment_INCOME = row["INCOME"].ToString();
+                model3.Payment_EXPENSE = row["EXPENSE"].ToString();
                 paymentModes.Add(model3);
             }
             connection3.Close();

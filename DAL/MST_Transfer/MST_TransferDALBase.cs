@@ -40,11 +40,8 @@ namespace Expense_Management_Software.DAL.MST_Transfer
             SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
             try
             {
-                if (transactionModel.TransferID == 0)
+                if (transactionModel.TransferID == 0 && CV.IsAdmin()==false)
                 {
-
-                    
-
 
                     DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("[PR_MST_TRANSFER_INSERT]");
                     sqlDatabase.AddInParameter(dbCommand, "@TransferTypeID", DbType.Int32, transactionModel.TransferTypeID);
@@ -52,6 +49,20 @@ namespace Expense_Management_Software.DAL.MST_Transfer
                     sqlDatabase.AddInParameter(dbCommand, "@TransferNote", DbType.String, transactionModel.TransferNote);
                     sqlDatabase.AddInParameter(dbCommand, "@TransferDate", DbType.DateTime, transactionModel.TransferDate);
                     sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, CV.UserID());
+                    sqlDatabase.AddInParameter(dbCommand, "@CategoryID", DbType.Int32, transactionModel.CategoryID);
+                    sqlDatabase.AddInParameter(dbCommand, "@PaymentModeID", DbType.Int32, transactionModel.PaymentModeID);
+
+                    bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
+                    return isSuccess;
+                }
+                else if(transactionModel.TransferID == 0 && CV.IsAdmin() == true)
+                {
+                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("[PR_MST_TRANSFER_INSERT]");
+                    sqlDatabase.AddInParameter(dbCommand, "@TransferTypeID", DbType.Int32, transactionModel.TransferTypeID);
+                    sqlDatabase.AddInParameter(dbCommand, "@TransferAmount", DbType.Decimal, transactionModel.TransferAmount);
+                    sqlDatabase.AddInParameter(dbCommand, "@TransferNote", DbType.String, transactionModel.TransferNote);
+                    sqlDatabase.AddInParameter(dbCommand, "@TransferDate", DbType.DateTime, transactionModel.TransferDate);
+                    sqlDatabase.AddInParameter(dbCommand, "@UserID", DbType.Int32, transactionModel.UserID);
                     sqlDatabase.AddInParameter(dbCommand, "@CategoryID", DbType.Int32, transactionModel.CategoryID);
                     sqlDatabase.AddInParameter(dbCommand, "@PaymentModeID", DbType.Int32, transactionModel.PaymentModeID);
 
@@ -98,7 +109,7 @@ namespace Expense_Management_Software.DAL.MST_Transfer
                 {
                     transactionModel.TransferID = Convert.ToInt32(dataRow["TransferID"]);
                     transactionModel.TransferTypeID = Convert.ToInt32(dataRow["TransferTypeID"]);
-                    transactionModel.TransferAmount = Convert.ToDouble(dataRow["TransferAmount"].ToString());
+                    transactionModel.TransferAmount = dataRow["TransferAmount"].ToString();
                     transactionModel.TransferDate = Convert.ToDateTime(dataRow["TransferDate"]);
                     transactionModel.TransferNote = dataRow["TransferNote"].ToString();
                     transactionModel.CategoryID = Convert.ToInt32(dataRow["CategoryID"]);
@@ -176,6 +187,23 @@ namespace Expense_Management_Software.DAL.MST_Transfer
         {
             SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
             DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("[PR_MST_PAYMENTMODE_SELECTALL]");
+            DataTable dataTable = new DataTable();
+            using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+            {
+                dataTable.Load(dataReader);
+            }
+
+            return dataTable;
+        }
+
+        #endregion
+
+        #region User Dropdown
+
+        public DataTable Admin_MST_User_Dropdown()
+        {
+            SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+            DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("[PR_MST_USER_SELECTALL]");
             DataTable dataTable = new DataTable();
             using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
             {

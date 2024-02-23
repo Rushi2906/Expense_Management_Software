@@ -9,22 +9,22 @@
 
     public class UserDashboardCount
     {
-        public decimal? Income { get; set; }
-        public decimal? Expense { get; set; }
+        public string? Income { get; set; }
+        public string? Expense { get; set; }
     }
 
     public class CategoryFilterModel
     {
         public string? CategoryName { get; set; }
-        public decimal? Category_INCOME { get; set; }
-        public decimal? Category_EXPENSE { get; set; }
+        public string? Category_INCOME { get; set; }
+        public string? Category_EXPENSE { get; set; }
     }
 
     public class PaymentModeModel
     {
         public string? PaymentModeName { get; set; }
-        public decimal? Payment_INCOME { get; set; }
-        public decimal? Payment_EXPENSE { get; set; }
+        public string? Payment_INCOME { get; set; }
+        public string? Payment_EXPENSE { get; set; }
     }
 
     public class Demo

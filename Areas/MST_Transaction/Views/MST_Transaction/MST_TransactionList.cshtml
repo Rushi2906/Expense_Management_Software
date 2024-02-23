@@ -92,7 +92,7 @@
                             <th><input type="checkbox" name="sample" class="selectall" /></th>
                             
                             <th class="fw-medium justify-content-center align-items-center">TransferType Name</th>
-                            <th class="fw-medium justify-content-center align-items-center">Transfer Amount</th>
+                        <th class="fw-medium justify-content-center align-items-center">Transfer Amount (₹)</th>
                             <th class="fw-medium justify-content-center align-items-center">Transfer Date</th>
                             @*<th class="fw-medium justify-content-center align-items-center">Transfer Note</th>*@
                             <th class="fw-medium justify-content-center align-items-center">Category</th>
@@ -123,7 +123,7 @@
                                     <div class="d-flex justify-content-center align-items-center product-name">
                                         <div class="d-flex flex-column">
                                             <span class="text-nowrap text-heading fw-medium">
-                                                    @Convert.ToDouble(dr["TransferAmount"].ToString())
+                                                    @dr["TransferAmount"].ToString()
                                             </span>
                                         </div>
                                     </div>

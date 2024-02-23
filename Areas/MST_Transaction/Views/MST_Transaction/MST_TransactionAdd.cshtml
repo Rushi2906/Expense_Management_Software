@@ -1,5 +1,12 @@
 ﻿﻿@{
-    Layout = "~/Views/Shared/_Layout_User.cshtml";
+    if (CV.IsAdmin() == false)
+    {
+        Layout = "~/Views/Shared/_Layout_User.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
 
 @using Expense_Management_Software.BAL
@@ -7,6 +14,7 @@
 <div class="d-flex flex-column">
     <div class="d-flex justify-content-center">
         @*<span class="col-3"></span>*@
+        
         <div class="card w-50">
             <div class="card-header">
                 <h5 class="card-tile mb-0">Transaction Add</h5>
@@ -16,6 +24,15 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
 
                 <div class="card-body">
+                    @if (CV.IsAdmin() == true)
+                    {
+                        <div class="form-floating form-floating-outline mb-4">
+                            <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.User,"UserID","UserName"))">
+                                <option value="">Select User</option>
+                            </select>
+                            <label for="ecommerce-product-name">User</label>
+                        </div>
+                    }
                     <div class="form-floating form-floating-outline mb-4">
                         <select class="form-control" asp-for="TransferTypeID" asp-items="@(new SelectList(ViewBag.TransferType,"TransferTypeID","TransferTypeName"))">
                             <option value="">Select Transfer Type</option>
@@ -36,7 +53,7 @@
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Transfer Amount" asp-for="TransferAmount" aria-label="Transfer Amount" required>
-                        <label for="ecommerce-product-name">Transfer Amount</label>
+                        <label for="ecommerce-product-name">Transfer Amount (₹)</label>
                     </div>
                     @*@{
                         DateTime date = new DateTime();

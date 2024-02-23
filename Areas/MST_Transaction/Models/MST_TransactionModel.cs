@@ -13,7 +13,7 @@
         public string? PaymentModeType { get; set; }
         public string? UserName { get; set; }
         public DateTime? TransferDate { get; set; }
-        public double? TransferAmount { get; set; }
+        public string? TransferAmount { get; set; }
         public bool? IsAdmin { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
